@@ -1,0 +1,17 @@
+# Xcode user settings
+xcuserdata
+
+# Fastlane output
+fastlane/test_output
+fastlane/report.xml
+
+# Xcode test result bundles
+*.xcresult
+
+# Certificates
+*.cer
+
+# Build artifacts
+*.ipa
+*.zip
+*.xcarchive
