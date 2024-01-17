@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  Template
+//  TemplateApp
 //
-//  Created by Mathijs Bernson on 08/12/2023.
+//  Created by Mathijs Bernson on 17/01/2024.
 //
 
 import SwiftUI

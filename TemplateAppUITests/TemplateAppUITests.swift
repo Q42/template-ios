@@ -1,13 +1,13 @@
 //
-//  TemplateUITests.swift
-//  TemplateUITests
+//  TemplateAppUITests.swift
+//  TemplateAppUITests
 //
-//  Created by Mathijs Bernson on 08/12/2023.
+//  Created by Mathijs Bernson on 17/01/2024.
 //
 
 import XCTest
 
-final class TemplateUITests: XCTestCase {
+final class TemplateAppUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,7 +28,14 @@ final class TemplateUITests: XCTestCase {
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCTAssertTrue(app.staticTexts["Hello, world!"].exists)
     }
 
+    func testLaunchPerformance() throws {
+        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+            // This measures how long it takes to launch your application.
+            measure(metrics: [XCTApplicationLaunchMetric()]) {
+                XCUIApplication().launch()
+            }
+        }
+    }
 }

@@ -1,14 +1,14 @@
 //
-//  TemplateApp.swift
-//  Template
+//  TemplateAppApp.swift
+//  TemplateApp
 //
-//  Created by Mathijs Bernson on 08/12/2023.
+//  Created by Mathijs Bernson on 17/01/2024.
 //
 
 import SwiftUI
 
 @main
-struct TemplateApp: App {
+struct TemplateAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
