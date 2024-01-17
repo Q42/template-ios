@@ -13,7 +13,6 @@
 		D5284F372B57C6B700BB32E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5284F362B57C6B700BB32E7 /* Preview Assets.xcassets */; };
 		D5284F412B57C6B700BB32E7 /* TemplateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5284F402B57C6B700BB32E7 /* TemplateAppTests.swift */; };
 		D5284F4B2B57C6B700BB32E7 /* TemplateAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5284F4A2B57C6B700BB32E7 /* TemplateAppUITests.swift */; };
-		D5284F4D2B57C6B700BB32E7 /* TemplateAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5284F4C2B57C6B700BB32E7 /* TemplateAppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +42,6 @@
 		D5284F402B57C6B700BB32E7 /* TemplateAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateAppTests.swift; sourceTree = "<group>"; };
 		D5284F462B57C6B700BB32E7 /* TemplateAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TemplateAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5284F4A2B57C6B700BB32E7 /* TemplateAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateAppUITests.swift; sourceTree = "<group>"; };
-		D5284F4C2B57C6B700BB32E7 /* TemplateAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				D5284F4A2B57C6B700BB32E7 /* TemplateAppUITests.swift */,
-				D5284F4C2B57C6B700BB32E7 /* TemplateAppUITestsLaunchTests.swift */,
 			);
 			path = TemplateAppUITests;
 			sourceTree = "<group>";
@@ -277,7 +274,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5284F4D2B57C6B700BB32E7 /* TemplateAppUITestsLaunchTests.swift in Sources */,
 				D5284F4B2B57C6B700BB32E7 /* TemplateAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
