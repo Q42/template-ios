@@ -1,0 +1,41 @@
+{
+  "configurations" : [
+    {
+      "id" : "2E268531-76BE-4986-BE2E-F7971FD484AB",
+      "name" : "English",
+      "options" : {
+        "language" : "en",
+        "region" : "GB"
+      }
+    },
+    {
+      "enabled" : false,
+      "id" : "AEB26D7A-9FE8-4E6A-B095-01F3DA26EFCA",
+      "name" : "Dutch",
+      "options" : {
+        "language" : "nl",
+        "region" : "NL"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TemplateApp.xcodeproj",
+        "identifier" : "D5284F3B2B57C6B700BB32E7",
+        "name" : "TemplateAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:TemplateApp.xcodeproj",
+        "identifier" : "D5284F452B57C6B700BB32E7",
+        "name" : "TemplateAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

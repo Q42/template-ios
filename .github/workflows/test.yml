@@ -1,0 +1,57 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches: ["main"]
+
+env:
+  XCODE_PROJECT: TemplateApp.xcodeproj
+  SCHEME: TemplateApp
+  TEST_PLAN: AllTests
+  TEST_RESULT_BUNDLE: TestResults.xcresult
+
+jobs:
+  build:
+    name: Run tests
+    runs-on: [macOS]
+  
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Cache Swift Package Manager dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ runner.temp }}/SourcePackages
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+
+    - name: Install Swift packages
+      run: |
+        xcodebuild -project "${{ env.XCODE_PROJECT }}" \
+          -scheme "${{ env.SCHEME }}" \
+          -onlyUsePackageVersionsFromResolvedFile \
+          -resolvePackageDependencies \
+          -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages"
+
+    - name: Run tests
+      env:
+        PLATFORM: ${{ 'iOS Simulator' }}
+      run: |
+        # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
+        DEVICE=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
+        xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
+          -scheme "${{ env.SCHEME }}" \
+          -testPlan "${{ env.TEST_PLAN }}" \
+          -destination "platform=$PLATFORM,name=$DEVICE" \
+          -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
+          -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
+          -disableAutomaticPackageResolution
+
+    - name: Upload test result bundle
+      uses: actions/upload-artifact@v4
+      if: ${{ failure() }}
+      with:
+        name: ${{ env.SCHEME }}-${{ github.ref_name }}-${{ github.sha }}.xcresult
+        path: ${{ env.TEST_RESULT_BUNDLE }}

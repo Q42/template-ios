@@ -1,0 +1,39 @@
+name: Set up Apple code signing
+description: Installs code signing certificate(s) to a temporary keychain
+inputs:
+  build-certificate-base64:
+    required: true
+    description: The base64-encoded p12 build certificate
+  p12-password:
+    required: true
+    description: The password for the p12 build certificate
+  keychain-password:
+    required: true
+    description: The password for the temporary keychain
+runs:
+  using: "composite"
+  steps:
+    - name: Install code signing certificate
+      env:
+        BUILD_CERTIFICATE_BASE64: ${{ inputs.build-certificate-base64 }}
+        P12_PASSWORD: ${{ inputs.p12-password }}
+        KEYCHAIN_PASSWORD: ${{ inputs.keychain-password }}
+      shell: bash
+      # Source:
+      # https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+      run: |
+        # Create variables
+        CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+        KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+        # Import certificate from secrets
+        echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+
+        # Create temporary keychain
+        security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+        security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+        security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+        # Import certificate to keychain
+        security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+        security list-keychain -d user -s $KEYCHAIN_PATH
