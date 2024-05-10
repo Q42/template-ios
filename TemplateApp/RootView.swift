@@ -9,15 +9,9 @@ import SwiftUI
 
 struct RootView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            HomeScreen()
         }
-        .padding()
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("RootView")
     }
 }
 
