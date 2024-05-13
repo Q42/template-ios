@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  TemplateApp
 //
-//  Created by Mathijs Bernson on 17/01/2024.
+//  Copyright © 2024 Q42. All rights reserved.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct RootView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,9 +16,11 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("RootView")
     }
 }
 
 #Preview {
-    ContentView()
+    RootView()
 }

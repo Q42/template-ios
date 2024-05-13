@@ -1,0 +1,15 @@
+{
+  "originHash" : "929d2090e52375231c5ebc33be1479d4266be85bbf192a8f578aa5ddb5af112c",
+  "pins" : [
+    {
+      "identity" : "salad",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Q42/Salad.git",
+      "state" : {
+        "revision" : "c10580e0632ddaf1542334d386ee3118e1074204",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

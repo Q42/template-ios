@@ -1,15 +1,14 @@
 //
-//  TemplateAppTests.swift
+//  ExampleTests.swift
 //  TemplateAppTests
 //
-//  Created by Mathijs Bernson on 17/01/2024.
+//  Copyright © 2024 Q42. All rights reserved.
 //
 
 import XCTest
 @testable import TemplateApp
 
 final class TemplateAppTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -26,5 +25,4 @@ final class TemplateAppTests: XCTestCase {
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
         XCTAssertEqual(21 * 2, 42)
     }
-
 }

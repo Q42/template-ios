@@ -1,0 +1,119 @@
+name: Run tests and deploy to TestFlight
+
+on:
+  workflow_dispatch:
+  # Uncomment this to run the workflow on every push to the main branch:
+  # push:
+  #   branches: ["main"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  XCODE_PROJECT: TemplateApp.xcodeproj
+  SCHEME: TemplateApp
+  TEST_PLAN: AllTests
+  TEST_RESULT_BUNDLE: TestResults.xcresult
+  ARCHIVE_PATH: TemplateApp.xcarchive
+  EXPORT_OPTIONS_PLIST: ExportOptions.plist
+
+jobs:
+  build:
+    name: Run tests and deploy to TestFlight
+    runs-on: [macos-latest]
+  
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Select Xcode version
+      run: sudo xcode-select --switch /Applications/Xcode_15.3.app
+
+    - name: Cache Swift Package Manager dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ runner.temp }}/SourcePackages
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-
+
+    - name: Install Swift packages
+      run: |
+        xcodebuild -project "${{ env.XCODE_PROJECT }}" \
+          -scheme "${{ env.SCHEME }}" \
+          -onlyUsePackageVersionsFromResolvedFile \
+          -resolvePackageDependencies \
+          -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages"
+
+    - name: Install code signing certificate
+      uses: "./.github/actions/code-signing-setup"
+      with:
+        build-certificate-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+        p12-password: ${{ secrets.P12_PASSWORD }}
+        keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+    - name: Install App Store Connect API key
+      run: |
+        echo -n "${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}" | base64 --decode -o "${{ runner.temp }}/AuthKey.p8"
+
+    - name: Run tests
+      env:
+        PLATFORM: ${{ 'iOS Simulator' }}
+      run: |
+        # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
+        DEVICE=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
+        xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
+          -scheme "${{ env.SCHEME }}" \
+          -testPlan "${{ env.TEST_PLAN }}" \
+          -destination "platform=$PLATFORM,name=$DEVICE" \
+          -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
+          -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
+          -disableAutomaticPackageResolution
+
+    - name: Upload test result bundle
+      uses: actions/upload-artifact@v4
+      if: ${{ failure() }}
+      with:
+        name: ${{ env.SCHEME }}-${{ github.ref_name }}-${{ github.sha }}.xcresult
+        path: ${{ env.TEST_RESULT_BUNDLE }}
+
+    - name: Archive build
+      run: |
+        xcodebuild clean archive -project "${{ env.XCODE_PROJECT }}" \
+          -scheme "${{ env.SCHEME }}" \
+          -destination generic/platform=iOS \
+          -archivePath "${{ runner.temp }}/${{ env.ARCHIVE_PATH }}" \
+          -allowProvisioningUpdates \
+          -authenticationKeyPath "${{ runner.temp }}/AuthKey.p8" \
+          -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
+          -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }} \
+          -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
+          -disableAutomaticPackageResolution
+
+    - name: Upload to TestFlight
+      run: |
+        xcodebuild -exportArchive \
+          -allowProvisioningUpdates \
+          -authenticationKeyPath "${{ runner.temp }}/AuthKey.p8" \
+          -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
+          -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }} \
+          -archivePath "${{ runner.temp }}/${{ env.ARCHIVE_PATH }}" \
+          -exportPath ${{ env.ARCHIVE_PATH }} \
+          -exportOptionsPlist ${{ env.EXPORT_OPTIONS_PLIST }}
+
+    # To add Crashlytics dSYM upload, grap the `upload-symbols` script from the Firebase SDK from here:
+    # https://github.com/firebase/firebase-ios-sdk/blob/main/Crashlytics/upload-symbols
+    # and add it to the repository in a folder called `scripts`. Then uncomment the following lines:
+
+    # - name: Upload dSYM files to Firebase Crashlytics
+    #   run: |
+    #     ./scripts/upload-symbols -p ios \
+    #       -gsp "TemplateApp/GoogleService-Info.plist" \
+    #       "${{ runner.temp }}/${{ env.ARCHIVE_PATH }}/dSYMs"
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.SCHEME }}-${{ github.ref_name }}-${{ github.sha }}.xcarchive
+        path: ${{ runner.temp }}/${{ env.ARCHIVE_PATH }}

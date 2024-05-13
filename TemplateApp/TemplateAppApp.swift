@@ -2,16 +2,18 @@
 //  TemplateAppApp.swift
 //  TemplateApp
 //
-//  Created by Mathijs Bernson on 17/01/2024.
+//  Copyright © 2024 Q42. All rights reserved.
 //
 
 import SwiftUI
 
 @main
 struct TemplateAppApp: App {
+    @UIApplicationDelegateAdaptor var appDelegate: TemplateAppAppDelegate
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
