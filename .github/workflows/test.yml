@@ -19,6 +19,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Select Xcode version
+      run: sudo xcode-select --switch /Applications/Xcode_15.3.app
+
     - name: Cache Swift Package Manager dependencies
       uses: actions/cache@v4
       with:
