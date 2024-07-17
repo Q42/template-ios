@@ -15,22 +15,21 @@
 		D5284F4B2B57C6B700BB32E7 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5284F4A2B57C6B700BB32E7 /* ExampleUITests.swift */; };
 		D58BA4CE2BEE6501000D8420 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = D58BA4CD2BEE6501000D8420 /* Factory */; };
 		D58BA4D02BEE696D000D8420 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4CF2BEE696D000D8420 /* Container.swift */; };
-		D58BA4D42BEE700D000D8420 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4D32BEE700D000D8420 /* HomeView.swift */; };
+		D58BA4D42BEE700D000D8420 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4D32BEE700D000D8420 /* HomeScreen.swift */; };
 		D58BA4D62BEE7012000D8420 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4D52BEE7012000D8420 /* HomeViewModel.swift */; };
 		D58BA4D82BEE702A000D8420 /* HomeViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4D72BEE702A000D8420 /* HomeViewState.swift */; };
-		D58BA4DB2BEE7095000D8420 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4DA2BEE7095000D8420 /* User.swift */; };
-		D58BA4DD2BEE70A1000D8420 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4DC2BEE70A1000D8420 /* UserRepository.swift */; };
+		D58BA4DB2BEE7095000D8420 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4DA2BEE7095000D8420 /* UserModel.swift */; };
+		D58BA4DD2BEE70A1000D8420 /* UserRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4DC2BEE70A1000D8420 /* UserRepositoryProtocol.swift */; };
 		D58BA4DF2BEE70B8000D8420 /* GetUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4DE2BEE70B8000D8420 /* GetUserUseCase.swift */; };
 		D58BA4E32BEE7101000D8420 /* UserLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4E22BEE7101000D8420 /* UserLocalDataSource.swift */; };
-		D58BA4E72BEE711B000D8420 /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4E62BEE711B000D8420 /* UserRepositoryImpl.swift */; };
+		D58BA4E72BEE711B000D8420 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4E62BEE711B000D8420 /* UserRepository.swift */; };
 		D58BA4EF2BEE7239000D8420 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4EE2BEE7239000D8420 /* UserEntity.swift */; };
 		D58BA4F12BEE725D000D8420 /* UserRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4F02BEE725D000D8420 /* UserRemoteDataSource.swift */; };
-		D58BA4F42BEE7389000D8420 /* UserEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4F32BEE7389000D8420 /* UserEntityMapper.swift */; };
+		D58BA4F42BEE7389000D8420 /* UserEntity+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4F32BEE7389000D8420 /* UserEntity+Model.swift */; };
 		D58BA4F72BEE73A5000D8420 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4F62BEE73A5000D8420 /* AsyncButton.swift */; };
 		D58BA4FA2BEE73CB000D8420 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4F92BEE73CB000D8420 /* ErrorAlert.swift */; };
 		D58BA4FC2BEE73E4000D8420 /* TemplateAppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4FB2BEE73E4000D8420 /* TemplateAppError.swift */; };
-		D58BA4FE2BEE74BF000D8420 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA4FD2BEE74BF000D8420 /* HomeScreen.swift */; };
-		D58BA5012BEE75B2000D8420 /* TaskExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA5002BEE75B2000D8420 /* TaskExtensions.swift */; };
+		D58BA5012BEE75B2000D8420 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA5002BEE75B2000D8420 /* Task+Extensions.swift */; };
 		D58BA5042BEE761D000D8420 /* RefreshBehaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58BA5032BEE761D000D8420 /* RefreshBehaviour.swift */; };
 		D5F745E82BEE14870064F06A /* TemplateAppAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F745E72BEE14870064F06A /* TemplateAppAppDelegate.swift */; };
 		D5F745EA2BEE14DD0064F06A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D5F745E92BEE14DD0064F06A /* Localizable.xcstrings */; };
@@ -67,22 +66,21 @@
 		D5284F462B57C6B700BB32E7 /* TemplateAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TemplateAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5284F4A2B57C6B700BB32E7 /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		D58BA4CF2BEE696D000D8420 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
-		D58BA4D32BEE700D000D8420 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D58BA4D32BEE700D000D8420 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		D58BA4D52BEE7012000D8420 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D58BA4D72BEE702A000D8420 /* HomeViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewState.swift; sourceTree = "<group>"; };
-		D58BA4DA2BEE7095000D8420 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D58BA4DC2BEE70A1000D8420 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		D58BA4DA2BEE7095000D8420 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		D58BA4DC2BEE70A1000D8420 /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
 		D58BA4DE2BEE70B8000D8420 /* GetUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserUseCase.swift; sourceTree = "<group>"; };
 		D58BA4E22BEE7101000D8420 /* UserLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocalDataSource.swift; sourceTree = "<group>"; };
-		D58BA4E62BEE711B000D8420 /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
+		D58BA4E62BEE711B000D8420 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		D58BA4EE2BEE7239000D8420 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		D58BA4F02BEE725D000D8420 /* UserRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteDataSource.swift; sourceTree = "<group>"; };
-		D58BA4F32BEE7389000D8420 /* UserEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntityMapper.swift; sourceTree = "<group>"; };
+		D58BA4F32BEE7389000D8420 /* UserEntity+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserEntity+Model.swift"; sourceTree = "<group>"; };
 		D58BA4F62BEE73A5000D8420 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		D58BA4F92BEE73CB000D8420 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		D58BA4FB2BEE73E4000D8420 /* TemplateAppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateAppError.swift; sourceTree = "<group>"; };
-		D58BA4FD2BEE74BF000D8420 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		D58BA5002BEE75B2000D8420 /* TaskExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtensions.swift; sourceTree = "<group>"; };
+		D58BA5002BEE75B2000D8420 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		D58BA5032BEE761D000D8420 /* RefreshBehaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshBehaviour.swift; sourceTree = "<group>"; };
 		D5F745E72BEE14870064F06A /* TemplateAppAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateAppAppDelegate.swift; sourceTree = "<group>"; };
 		D5F745E92BEE14DD0064F06A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -202,8 +200,7 @@
 		D58BA4D22BEE7008000D8420 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				D58BA4FD2BEE74BF000D8420 /* HomeScreen.swift */,
-				D58BA4D32BEE700D000D8420 /* HomeView.swift */,
+				D58BA4D32BEE700D000D8420 /* HomeScreen.swift */,
 				D58BA4D52BEE7012000D8420 /* HomeViewModel.swift */,
 				D58BA4D72BEE702A000D8420 /* HomeViewState.swift */,
 			);
@@ -222,8 +219,8 @@
 		D58BA4E02BEE70EB000D8420 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				D58BA4DA2BEE7095000D8420 /* User.swift */,
-				D58BA4DC2BEE70A1000D8420 /* UserRepository.swift */,
+				D58BA4DA2BEE7095000D8420 /* UserModel.swift */,
+				D58BA4DC2BEE70A1000D8420 /* UserRepositoryProtocol.swift */,
 				D58BA4DE2BEE70B8000D8420 /* GetUserUseCase.swift */,
 			);
 			path = User;
@@ -241,8 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				D58BA4EE2BEE7239000D8420 /* UserEntity.swift */,
-				D58BA4E62BEE711B000D8420 /* UserRepositoryImpl.swift */,
-				D58BA4F32BEE7389000D8420 /* UserEntityMapper.swift */,
+				D58BA4E62BEE711B000D8420 /* UserRepository.swift */,
+				D58BA4F32BEE7389000D8420 /* UserEntity+Model.swift */,
 				D58BA4F02BEE725D000D8420 /* UserRemoteDataSource.swift */,
 				D58BA4E22BEE7101000D8420 /* UserLocalDataSource.swift */,
 			);
@@ -268,7 +265,7 @@
 		D58BA4FF2BEE75AD000D8420 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D58BA5002BEE75B2000D8420 /* TaskExtensions.swift */,
+				D58BA5002BEE75B2000D8420 /* Task+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -444,24 +441,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D58BA4E72BEE711B000D8420 /* UserRepositoryImpl.swift in Sources */,
+				D58BA4E72BEE711B000D8420 /* UserRepository.swift in Sources */,
 				D5F745E82BEE14870064F06A /* TemplateAppAppDelegate.swift in Sources */,
 				D58BA4DF2BEE70B8000D8420 /* GetUserUseCase.swift in Sources */,
 				D58BA4FA2BEE73CB000D8420 /* ErrorAlert.swift in Sources */,
 				D58BA4E32BEE7101000D8420 /* UserLocalDataSource.swift in Sources */,
 				D58BA4D62BEE7012000D8420 /* HomeViewModel.swift in Sources */,
-				D58BA5012BEE75B2000D8420 /* TaskExtensions.swift in Sources */,
-				D58BA4DD2BEE70A1000D8420 /* UserRepository.swift in Sources */,
+				D58BA5012BEE75B2000D8420 /* Task+Extensions.swift in Sources */,
+				D58BA4DD2BEE70A1000D8420 /* UserRepositoryProtocol.swift in Sources */,
 				D58BA4F72BEE73A5000D8420 /* AsyncButton.swift in Sources */,
 				D58BA4EF2BEE7239000D8420 /* UserEntity.swift in Sources */,
-				D58BA4FE2BEE74BF000D8420 /* HomeScreen.swift in Sources */,
 				D58BA4D02BEE696D000D8420 /* Container.swift in Sources */,
 				D58BA4D82BEE702A000D8420 /* HomeViewState.swift in Sources */,
-				D58BA4DB2BEE7095000D8420 /* User.swift in Sources */,
-				D58BA4F42BEE7389000D8420 /* UserEntityMapper.swift in Sources */,
+				D58BA4DB2BEE7095000D8420 /* UserModel.swift in Sources */,
+				D58BA4F42BEE7389000D8420 /* UserEntity+Model.swift in Sources */,
 				D5284F322B57C6B600BB32E7 /* RootView.swift in Sources */,
 				D58BA4FC2BEE73E4000D8420 /* TemplateAppError.swift in Sources */,
-				D58BA4D42BEE700D000D8420 /* HomeView.swift in Sources */,
+				D58BA4D42BEE700D000D8420 /* HomeScreen.swift in Sources */,
 				D5284F302B57C6B600BB32E7 /* TemplateAppApp.swift in Sources */,
 				D58BA4F12BEE725D000D8420 /* UserRemoteDataSource.swift in Sources */,
 			);

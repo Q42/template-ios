@@ -12,6 +12,7 @@ import Foundation
 
     func refresh() async {
         do {
+            uiState = .loading
             try await loadUser()
         } catch {
             uiState = .error(error)

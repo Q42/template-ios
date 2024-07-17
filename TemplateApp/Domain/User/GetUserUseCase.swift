@@ -9,9 +9,9 @@ import Foundation
 import Factory
 
 class GetUserUseCase {
-    @Injected(\.userRepository) var userRepository: UserRepository
+    @Injected(\.userRepository) var userRepository: UserRepositoryProtocol
 
-    func invoke() async throws -> User {
+    func invoke() async throws -> UserModel {
         try await userRepository.getUser()
     }
 }

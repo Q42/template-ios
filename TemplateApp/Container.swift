@@ -12,8 +12,8 @@ extension Container {
 
     // MARK: User
 
-    var userRepository: Factory<UserRepository> {
-        Factory(self) { UserRepositoryImpl() }
+    var userRepository: Factory<UserRepositoryProtocol> {
+        Factory(self) { UserRepository() }
     }
 
     var userRemoteDataSource: Factory<UserRemoteDataSource> {

@@ -43,16 +43,15 @@ We use the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13
 
 #### Clean Architecture layers
 
-- _UI_ with SwiftUI
-- _Presentation_ with the ViewModel
-- _Domain_ for domain models, UseCases and other domain logic.
-- _Data_ for data storage and retrieval.
+- *Features* with SwiftUI views and view models
+- *Domain* for domain models, UseCases and other domain logic.
+- *Data* for persistent data storage and retrieval using Repositories.
 
 #### Use cases
 
 - Use cases are single-purpose: GetUserUseCase, but also: GetUserWithArticlesUseCase.
 - Use cases can call other use-cases.
-- Use cases do not have state, state preferably lives in the data layer.
+- Use cases do not have persistent state. They are instantiated, called to perform their function once or multiple times, and are then discarded.
 
 #### Dependency injection
 
@@ -82,7 +81,7 @@ When choosing a third-party library, prefer libraries that:
 
 ### Views
 
-* Keep views small and focused. When a view becomes large, split it up into smaller views.
+* Keep views focused (single-responsibility principle from SOLID). When a view becomes large a, split it up into smaller views.
 * Every view gets a UI preview if at all possible. The preview should show the view in different states using dummy data.
 * We use [custom SF Symbols](https://developer.apple.com/documentation/uikit/uiimage/creating_custom_symbol_images_for_your_app/) whenever a custom icon is needed, so that they render in a consistent manner. 
 
@@ -102,8 +101,8 @@ String catalogs are used to localize the project. The default languages supporte
 
 ### Async code
 
-* Asynchronous code should be written using async/await whenever possible.
-* [Combine](https://developer.apple.com/documentation/combine) should only be used when async/await or `AsyncSequence` fall short, and more complexity is needed to solve the problem at hand.
+* `async`/`await` is preferred over Combine/Promises/etc. to leverage the compiler concurrency checking.
+* [Combine](https://developer.apple.com/documentation/combine) can be used when `async`/`await` or `AsyncSequence` fall short, and more complexity is needed to solve the problem at hand.
 
 ## Continuous integration
 
