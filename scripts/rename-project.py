@@ -12,22 +12,28 @@ oldProjectName = "TemplateApp"
 print("Enter new project name:")
 newProjectName = input()
 
-# ========= Rename folders:
+# ========= Rename folders and files:
 
 print(
     "\nRenaming '%s' to '%s' in folder names.\n" % (oldProjectName, newProjectName)
 )
 
+def rename(root, fileName):
+    oldFileName = os.path.join(root, fileName)
+    newFileName = os.path.join(root, fileName.replace(oldProjectName, newProjectName))
+    if dryRun:
+        print("Would rename folder: %s to %s" % (oldFileName, newFileName))
+    else:
+        print("Renaming folder: %s to %s" % (oldFileName, newFileName))
+        os.rename(oldFileName, newFileName)
+
 for root, dirs, files in os.walk(folder, topdown=False):
     for subDir in dirs:
         if oldProjectName in subDir:
-            oldFolderName = os.path.join(root, subDir)
-            newFolderName = os.path.join(root, subDir.replace(oldProjectName, newProjectName))
-            if dryRun:
-                print("Would rename folder: %s to %s" % (oldFolderName, newFolderName))
-            else:
-                print("Renaming folder: %s to %s" % (oldFolderName, newFolderName))
-                os.rename(oldFolderName, newFolderName)
+            rename(root, subDir)
+    for subFile in files:
+        if oldProjectName in subFile:
+            rename(root, subFile)
 
 # ========= Rename usages in source files: =========
 
@@ -35,8 +41,7 @@ print(
     "\nReplacing all occurrences of %s in source files with: '%s'.\n" % (oldProjectName, newProjectName)
 )
 
-def replace_package_name_occurences_in_file(filename):
-    print("Would update file: " + filename)
+def replace_project_name_occurences_in_file(filename):
     with open(filename, "r") as file:
         filedata = file.read()
 
@@ -57,7 +62,7 @@ for root, dirs, files in os.walk(folder, topdown=False):
         extension = name.split(".")[-1]
         if extension in allowed_extensions:
             file_name = os.path.join(root, name)
-            replace_package_name_occurences_in_file(file_name)
+            replace_project_name_occurences_in_file(file_name)
 
 print(
     "\nDone renaming project to: '%s'.\n" % (newProjectName)
