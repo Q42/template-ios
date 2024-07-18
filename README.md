@@ -7,8 +7,8 @@ This is a template for creating iOS projects at Q42. It has opinionated defaults
 1. Click the green "Use this template" button in the Github repo to create your own repository with
    this code template.
 1. Clone the new repo locally on your machine.
-1. Run `python ./scripts/rename-project.py` or `python3 ./scripts/rename-project.py` from the
-   project root, to change the project name. The script will ask for your new project name and update all references.
+1. Run `python3 ./scripts/rename-project.py` from the
+   project root, to change the project name. The script will ask for your new project name. You can delete the script afterwards.
 
 ## Features
 
