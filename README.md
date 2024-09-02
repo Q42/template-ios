@@ -4,18 +4,18 @@ This is a template for creating iOS projects at Q42. It has opinionated defaults
 
 ## Using this template
 
-1. Click the green "Use this template" button in the Github repo to create your own repository with
-   this code template.
+1. Click the green "Use this template" button in the Github repo to create your own repository with this code template.
 1. Clone the new repo locally on your machine.
-1. Run `python3 ./scripts/rename-project.py` from the
-   project root, to change the project name. The script will ask for your new project name. You can delete the script afterwards.
+1. Run `python3 ./scripts/rename-project.py` from the project root, to change the project name. The script will ask for your new project name. You can delete the script afterwards.
+1. Optional: Configure GitHub Actions for TestFlight and App Store builds. Edit `build.yml` to enable the workflow trigger. Set an App Store Connect API key and signing certificate in your GitHub Actions Secrets as described in this readme under [CI configuration](#ci-configuration).
 
 ## Features
 
 Only basic features that almost all projects use, were added in this template:
 
 * SwiftUI using the SwiftUI lifecycle with an AppDelegate
-* Dependency injection using Factory
+* Implementation of the Clean Architecture
+* Dependency injection using the library Factory
 * Unit tests and UI tests using Salad
 * GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
 
