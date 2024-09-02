@@ -1,13 +1,6 @@
 //
-//  TemplateAppUITests.swift
-//  TemplateAppUITests
-//
-//  Created by Mathijs Bernson on 17/01/2024.
-//
-
-//
 //  ExampleUITests.swift
-//  TemplateAppTests
+//  TemplateAppUITests
 //
 //  Copyright © 2024 Q42. All rights reserved.
 //
@@ -16,21 +9,30 @@ import XCTest
 import Salad
 
 final class ExampleUITests: XCTestCase {
-    var scenario: Scenario<RootView>!
+    var scenario: Scenario<HomeView>!
 
     override func setUp() {
         continueAfterFailure = false
 
         let app = XCUIApplication()
+        // Custom launch arguments can be set here
+        // app.launchArguments = ["testing"]
         app.launch()
+        // A scenario provides the starting point of your tests ('GIVEN <screen>'). In each test case,
+        // you chain behaviors ('WHEN I do <action>') and assertions ('THEN I expect <result>') using the scenario.
         scenario = Scenario(given: app)
     }
 
     func testExample() {
+        // Example of a behavior-driven test
         scenario
-            .then { rootView in
-                XCTAssertTrue(rootView.identifyingElement.staticTexts["Hello, world!"].waitForExist(timeout: .asyncUI),
-                              "Expected to see 'Hello, world!' label")
+            .then { homeView in
+                XCTAssertFalse(homeView.userEmailLabel.exists)
+            }
+            .when(RefreshHomeView())
+            .then { homeView in
+                XCTAssertTrue(homeView.userEmailLabel.waitForExist(timeout: .fastNetworkCall))
+                XCTAssertEqual(homeView.userEmailLabel.label, "example@q42.com")
             }
     }
 }

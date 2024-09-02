@@ -1,6 +1,15 @@
 {
-  "originHash" : "929d2090e52375231c5ebc33be1479d4266be85bbf192a8f578aa5ddb5af112c",
+  "originHash" : "7f5d67830751eed43216e3b2c4a63415b54e9f0b67f3d3f4d7fb12143114915a",
   "pins" : [
+    {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory.git",
+      "state" : {
+        "revision" : "587995f7d5cc667951d635fbf6b4252324ba0439",
+        "version" : "2.3.2"
+      }
+    },
     {
       "identity" : "salad",
       "kind" : "remoteSourceControl",
