@@ -19,7 +19,7 @@ Only basic features that almost all projects use, were added in this template:
 * Unit tests and UI tests using Salad
 * GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
 
-Xcode 15.3 or higher is required.
+Xcode 16.0 or higher is required.
 
 ## Code style
 
