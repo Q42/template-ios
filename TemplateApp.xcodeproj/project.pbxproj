@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -367,7 +367,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = Q42;
 				TargetAttributes = {
 					D5284F2B2B57C6B600BB32E7 = {
@@ -384,7 +384,6 @@
 				};
 			};
 			buildConfigurationList = D5284F272B57C6B600BB32E7 /* Build configuration list for PBXProject "TemplateApp" */;
-			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -397,6 +396,7 @@
 				D5F745F32BEE48BC0064F06A /* XCRemoteSwiftPackageReference "Salad" */,
 				D58BA4CC2BEE6501000D8420 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = D5284F2D2B57C6B600BB32E7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -683,7 +683,6 @@
 		D5284F542B57C6B700BB32E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.2.3;
@@ -702,7 +701,6 @@
 		D5284F552B57C6B700BB32E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.2.3;
@@ -721,7 +719,6 @@
 		D5284F572B57C6B700BB32E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.2.3;
 				DEVELOPMENT_TEAM = "";
@@ -739,7 +736,6 @@
 		D5284F582B57C6B700BB32E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.2.3;
 				DEVELOPMENT_TEAM = "";
