@@ -1,16 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "An error occurred" : {
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Er is een fout opgetreden"
-          }
-        }
-      }
-    },
     "Home" : {
       "localizations" : {
         "nl" : {
