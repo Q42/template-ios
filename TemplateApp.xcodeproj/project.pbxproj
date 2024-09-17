@@ -32,6 +32,7 @@
 		D5284F2C2B57C6B600BB32E7 /* TemplateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5284F3C2B57C6B700BB32E7 /* TemplateAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TemplateAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5284F462B57C6B700BB32E7 /* TemplateAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TemplateAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D58400B12C99812400F7AF19 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D5F745EB2BEE15210064F06A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				D5F745EB2BEE15210064F06A /* README.md */,
+				D58400B12C99812400F7AF19 /* CHANGELOG.md */,
 				D558C87E2C986B5500E28A82 /* TemplateApp */,
 				D558C89A2C986B5800E28A82 /* TemplateAppTests */,
 				D558C8A12C986B5A00E28A82 /* TemplateAppUITests */,
