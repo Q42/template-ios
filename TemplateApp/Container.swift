@@ -8,6 +8,15 @@
 import Foundation
 import Factory
 
+extension Container: @retroactive AutoRegistering {
+    public func autoRegister() {
+        // Injected dependencies are singletons by default.
+        // Check the Factory documentation for more information about the scopes:
+        // https://hmlongco.github.io/Factory/documentation/factory/scopes
+        manager.defaultScope = .singleton
+    }
+}
+
 extension Container {
 
     // MARK: User
