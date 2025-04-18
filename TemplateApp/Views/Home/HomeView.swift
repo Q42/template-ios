@@ -1,5 +1,5 @@
 //
-//  HomeScreen.swift
+//  HomeView.swift
 //  TemplateApp
 //
 //  Copyright © 2024 Q42. All rights reserved.
@@ -7,25 +7,12 @@
 
 import SwiftUI
 
-struct HomeScreen: View {
-    @StateObject var viewModel = HomeViewModel()
-
-    var body: some View {
-        HomeView(
-            viewState: viewModel.uiState,
-            refresh: viewModel.refresh
-        )
-        .navigationTitle("Home")
-    }
-}
-
-private struct HomeView: View {
-    let viewState: HomeViewState
-    let refresh: () async -> Void
+struct HomeView: View {
+    @State var viewModel = HomeViewModel()
 
     var body: some View {
         VStack {
-            switch viewState {
+            switch viewModel.state {
             case .data(let userEmailTitle):
                 if let userEmailTitle {
                     Text(userEmailTitle)
@@ -42,7 +29,7 @@ private struct HomeView: View {
 
             Button("Refresh") {
                 Task {
-                    await refresh()
+                    await viewModel.refresh()
                 }
             }
             .accessibilityIdentifier("refreshButton")
@@ -50,33 +37,30 @@ private struct HomeView: View {
         .padding()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("HomeView")
+        .navigationTitle("Home")
     }
 }
 
 #Preview("Data") {
-    HomeView(
-        viewState: .data(userEmailTitle: "hello@q42.nl"),
-        refresh: {}
-    )
+    @Previewable @State var viewModel = HomeViewModel()
+    viewModel.state = .data(userEmailTitle: "hello@q42.nl")
+    return HomeView(viewModel: viewModel)
 }
 
 #Preview("Loading") {
-    HomeView(
-        viewState: .loading,
-        refresh: {}
-    )
+    @Previewable @State var viewModel = HomeViewModel()
+    viewModel.state = .loading
+    return HomeView(viewModel: viewModel)
 }
 
 #Preview("Empty") {
-    HomeView(
-        viewState: .empty,
-        refresh: {}
-    )
+    @Previewable @State var viewModel = HomeViewModel()
+    viewModel.state = .empty
+    return HomeView(viewModel: viewModel)
 }
 
 #Preview("Error") {
-    HomeView(
-        viewState: .error(TemplateAppError(message: "Example error message")),
-        refresh: {}
-    )
+    @Previewable @State var viewModel = HomeViewModel()
+    viewModel.state = .error(TemplateAppError(message: "Example error message"))
+    return HomeView(viewModel: viewModel)
 }

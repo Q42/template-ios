@@ -7,21 +7,22 @@
 
 import Foundation
 
-@MainActor class HomeViewModel: ObservableObject {
-    @Published var uiState: HomeViewState = .empty
+@Observable
+@MainActor class HomeViewModel {
+    var state: HomeViewState = .empty
 
     func refresh() async {
         do {
-            uiState = .loading
+            state = .loading
             try await loadUser()
         } catch {
-            uiState = .error(error)
+            state = .error(error)
         }
     }
 
     private func loadUser() async throws {
         let getUser = GetUserUseCase()
         let user = try await getUser.invoke()
-        uiState = .data(userEmailTitle: user.email)
+        state = .data(userEmailTitle: user.email)
     }
 }
