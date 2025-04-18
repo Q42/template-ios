@@ -47,14 +47,14 @@ jobs:
     - name: Determine test device
       run: |
         echo "PLATFORM=iOS Simulator" >> "$GITHUB_ENV"
-        # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-        echo "DEVICE=$(xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//")" >> "$GITHUB_ENV"
+        # Select the ID of the first available iPhone simulator
+        echo "DEVICE_ID=$(xcrun simctl list devices available | sed -n -E "s/    iPhone (.*) \(([A-F0-9\-]+)\) \([A-Za-z]+\)/\2/p" | head -1)" >> "$GITHUB_ENV"
 
     - name: Build for testing
       run: |
         xcodebuild build-for-testing -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
-          -destination "platform=$PLATFORM,name=$DEVICE" \
+          -destination "platform=$PLATFORM,id=$DEVICE_ID" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
           -disableAutomaticPackageResolution
 
@@ -63,7 +63,7 @@ jobs:
         xcodebuild test-without-building -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
-          -destination "platform=$PLATFORM,name=$DEVICE" \
+          -destination "platform=$PLATFORM,id=$DEVICE_ID" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
           -disableAutomaticPackageResolution
