@@ -52,21 +52,21 @@ jobs:
 
     - name: Build for testing
       run: |
-        xcodebuild build-for-testing -project "${{ env.XCODE_PROJECT }}" \
+        set -o pipefail && xcodebuild build-for-testing -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -destination "platform=$PLATFORM,name=$DEVICE" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution
+          -disableAutomaticPackageResolution | xcpretty
 
     - name: Run tests
       run: |
-        xcodebuild test-without-building -project "${{ env.XCODE_PROJECT }}" \
+        set -o pipefail && xcodebuild test-without-building -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
           -destination "platform=$PLATFORM,name=$DEVICE" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution
+          -disableAutomaticPackageResolution | xcpretty
 
     - name: Upload test result bundle
       uses: actions/upload-artifact@v4
