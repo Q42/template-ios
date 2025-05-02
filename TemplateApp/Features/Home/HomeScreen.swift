@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    @StateObject var viewModel = HomeViewModel()
+    @StateObject var viewModel: HomeViewModel
+
+    init(navigator: Navigator) {
+        _viewModel = StateObject(wrappedValue: HomeViewModel(navigator: navigator))
+    }
 
     var body: some View {
         HomeView(
             viewState: viewModel.uiState,
-            refresh: viewModel.refresh
+            refresh: viewModel.refresh,
+            onNavigationExamplesButtonPress: viewModel.onNavigationExamplesButtonPress
         )
         .navigationTitle("Home")
     }
@@ -22,6 +27,7 @@ struct HomeScreen: View {
 private struct HomeView: View {
     let viewState: HomeViewState
     let refresh: () async -> Void
+    let onNavigationExamplesButtonPress: () -> Void
 
     var body: some View {
         VStack {
@@ -46,6 +52,12 @@ private struct HomeView: View {
                 }
             }
             .accessibilityIdentifier("refreshButton")
+            Spacer()
+                .frame(height: 30)
+            Button("Navigation Examples") {
+                onNavigationExamplesButtonPress()
+            }
+            .accessibilityIdentifier("Navigation Examples")
         }
         .padding()
         .accessibilityElement(children: .contain)
@@ -56,27 +68,31 @@ private struct HomeView: View {
 #Preview("Data") {
     HomeView(
         viewState: .data(userEmailTitle: "hello@q42.nl"),
-        refresh: {}
+        refresh: {},
+        onNavigationExamplesButtonPress: {}
     )
 }
 
 #Preview("Loading") {
     HomeView(
         viewState: .loading,
-        refresh: {}
+        refresh: {},
+        onNavigationExamplesButtonPress: {}
     )
 }
 
 #Preview("Empty") {
     HomeView(
         viewState: .empty,
-        refresh: {}
+        refresh: {},
+        onNavigationExamplesButtonPress: {}
     )
 }
 
 #Preview("Error") {
     HomeView(
         viewState: .error(TemplateAppError(message: "Example error message")),
-        refresh: {}
+        refresh: {},
+        onNavigationExamplesButtonPress: {}
     )
 }

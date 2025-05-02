@@ -9,9 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     var body: some View {
-        NavigationView {
-            HomeScreen()
-        }
+        NavigationRoot(rootDestination: .home)
     }
 }
 

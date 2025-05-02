@@ -23,4 +23,8 @@ extension Container {
     var userLocalDataSource: Factory<UserLocalDataSource> {
         Factory(self) { UserLocalDataSource() }
     }
+
+    var navigationGraph: Factory<NavigationGraph> {
+        Factory(self) { NavigationGraph() }.singleton
+    }
 }

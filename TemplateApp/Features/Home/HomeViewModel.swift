@@ -7,7 +7,7 @@
 
 import Foundation
 
-@MainActor class HomeViewModel: ObservableObject {
+@MainActor class HomeViewModel: ViewModel {
     @Published var uiState: HomeViewState = .empty
 
     func refresh() async {
@@ -17,6 +17,10 @@ import Foundation
         } catch {
             uiState = .error(error)
         }
+    }
+
+    func onNavigationExamplesButtonPress() {
+        navigate(to: .navigationExamples)
     }
 
     private func loadUser() async throws {

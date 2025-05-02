@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Close" : {
+
+    },
     "Home" : {
       "localizations" : {
         "nl" : {
@@ -10,6 +13,9 @@
           }
         }
       }
+    },
+    "Navigation Examples" : {
+
     },
     "Ok" : {
       "localizations" : {
@@ -30,6 +36,9 @@
           }
         }
       }
+    },
+    "Sheet Example" : {
+
     }
   },
   "version" : "1.0"
