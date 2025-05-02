@@ -10,6 +10,6 @@ import Foundation
 
 class SheetExampleViewModel : ViewModel {
     func onCloseButtonPress() {
-        stopPresentingSheet()
+        dismiss()
     }
 }

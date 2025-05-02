@@ -26,11 +26,7 @@ struct NavigationRoot: View {
             }
         }
         .sheet(item: $navigator.sheetDestination) { destination in
-            NavigationRoot(rootDestination: destination)
-                .task {
-                    sleep(3)
-                    navigator.stopPresentingSheet()
-                }
+            NavigationRoot(rootDestination: destination, presentingNavigator: navigator)
         }
     }
 }
