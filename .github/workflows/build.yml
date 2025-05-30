@@ -65,10 +65,9 @@ jobs:
 
     - name: Run tests
       env:
-        PLATFORM: ${{ 'iOS Simulator' }}
+        PLATFORM: 'iOS Simulator'
+        DEVICE: 'iPhone 16'
       run: |
-        # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-        DEVICE=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
         set -o pipefail && xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
