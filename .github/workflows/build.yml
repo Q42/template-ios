@@ -65,17 +65,16 @@ jobs:
 
     - name: Run tests
       env:
-        PLATFORM: ${{ 'iOS Simulator' }}
+        PLATFORM: 'iOS Simulator'
+        DEVICE: 'iPhone 16'
       run: |
-        # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-        DEVICE=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
-        xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
+        set -o pipefail && xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
           -destination "platform=$PLATFORM,name=$DEVICE" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution
+          -disableAutomaticPackageResolution | xcpretty
 
     - name: Upload test result bundle
       uses: actions/upload-artifact@v4
@@ -86,7 +85,7 @@ jobs:
 
     - name: Archive build
       run: |
-        xcodebuild clean archive -project "${{ env.XCODE_PROJECT }}" \
+        set -o pipefail && xcodebuild clean archive -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -destination generic/platform=iOS \
           -archivePath "${{ runner.temp }}/${{ env.ARCHIVE_PATH }}" \
@@ -95,7 +94,7 @@ jobs:
           -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
           -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }} \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution
+          -disableAutomaticPackageResolution | xcpretty
 
     - name: Upload to TestFlight
       run: |

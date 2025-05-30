@@ -3,6 +3,8 @@ name: Run tests
 on:
   pull_request:
     branches: ["main"]
+  push:
+    branches: ["main"]
 
 env:
   XCODE_PROJECT: TemplateApp.xcodeproj
@@ -14,6 +16,10 @@ jobs:
   build:
     name: Run tests
     runs-on: [macos-latest]
+
+    env:
+        PLATFORM: 'iOS Simulator'
+        DEVICE: 'iPhone 16'
   
     steps:
     - name: Checkout
@@ -44,29 +50,23 @@ jobs:
           -resolvePackageDependencies \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages"
 
-    - name: Determine test device
-      run: |
-        echo "PLATFORM=iOS Simulator" >> "$GITHUB_ENV"
-        # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-        echo "DEVICE=$(xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//")" >> "$GITHUB_ENV"
-
     - name: Build for testing
       run: |
-        xcodebuild build-for-testing -project "${{ env.XCODE_PROJECT }}" \
+        set -o pipefail && xcodebuild build-for-testing -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -destination "platform=$PLATFORM,name=$DEVICE" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution
+          -disableAutomaticPackageResolution | xcpretty
 
     - name: Run tests
       run: |
-        xcodebuild test-without-building -project "${{ env.XCODE_PROJECT }}" \
+        set -o pipefail && xcodebuild test-without-building -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
           -destination "platform=$PLATFORM,name=$DEVICE" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution
+          -disableAutomaticPackageResolution | xcpretty
 
     - name: Upload test result bundle
       uses: actions/upload-artifact@v4
