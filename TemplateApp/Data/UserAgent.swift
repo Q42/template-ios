@@ -12,7 +12,7 @@ import UIKit
 /// Returns the user agent string for this device, consisting of the app name, app version, build number, OS version and device model.
 /// eg. MyApp/1.0 (1; iOS/18.3; iPhone13,2)
 /// This format is consistent with the Android app template.
-@MainActor func UserAgentString() -> String {
+@MainActor func userAgentString() -> String {
     let info = Bundle.main.infoDictionary
     let appName = info?["CFBundleName"] as? String ?? "unknown"
     let appVersion = info?["CFBundleShortVersionString"] as? String ?? "unknown"
