@@ -27,6 +27,18 @@ The Xcode project is configured to use 4 spaces for indentation.
 For linting Swift source code, we use [SwiftLint](https://github.com/realm/SwiftLint).
 A configuration for [SwiftFormat](http://github.com/nicklockwood/SwiftFormat) is also included.
 
+To install and run the formatter:
+```bash
+brew install swiftformat
+swiftformat .
+```
+
+To install and run the linter:
+```bash
+brew install swiftlint
+swiftlint . --fix
+```
+
 ## App architecture
 
 ### Core principles
