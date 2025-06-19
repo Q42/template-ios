@@ -9,6 +9,6 @@ import Foundation
 
 extension UserModel {
     init(userEntity: UserEntity) {
-        self.email = userEntity.email
+        email = userEntity.email
     }
 }

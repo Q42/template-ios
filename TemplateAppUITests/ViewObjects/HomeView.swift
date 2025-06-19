@@ -5,8 +5,8 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import XCTest
 import Salad
+import XCTest
 
 struct HomeView: ViewObject {
     let root: XCUIElement
@@ -15,6 +15,7 @@ struct HomeView: ViewObject {
     var userEmailLabel: XCUIElement {
         identifyingElement.staticTexts["userEmailLabel"]
     }
+
     var refreshButton: XCUIElement {
         identifyingElement.buttons["refreshButton"]
     }

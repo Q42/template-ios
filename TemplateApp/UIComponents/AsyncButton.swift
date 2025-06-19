@@ -68,8 +68,7 @@ extension AsyncButton where Label == Text {
     init(_ label: LocalizedStringKey,
          role: ButtonRole? = nil,
          actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
-         action: @escaping () async -> Void
-    ) {
+         action: @escaping () async -> Void) {
         self.init(role: role, action: action) {
             Text(label)
         }
@@ -78,8 +77,7 @@ extension AsyncButton where Label == Text {
     init(verbatim label: String,
          role: ButtonRole? = nil,
          actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
-         action: @escaping () async -> Void
-    ) {
+         action: @escaping () async -> Void) {
         self.init(role: role, action: action) {
             Text(label)
         }
@@ -90,8 +88,7 @@ extension AsyncButton where Label == Image {
     init(imageName: String,
          role: ButtonRole? = nil,
          actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
-         action: @escaping () async -> Void
-    ) {
+         action: @escaping () async -> Void) {
         self.init(role: role, action: action) {
             Image(imageName)
         }
@@ -100,8 +97,7 @@ extension AsyncButton where Label == Image {
     init(systemImageName: String,
          role: ButtonRole? = nil,
          actionOptions: Set<ActionOption> = Set(ActionOption.allCases),
-         action: @escaping () async -> Void
-    ) {
+         action: @escaping () async -> Void) {
         self.init(role: role, action: action) {
             Image(systemName: systemImageName)
         }

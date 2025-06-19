@@ -13,12 +13,12 @@ struct HomeView: View {
     var body: some View {
         VStack {
             switch viewModel.state {
-            case .data(let userEmailTitle):
+            case let .data(userEmailTitle):
                 if let userEmailTitle {
                     Text(userEmailTitle)
                         .accessibilityIdentifier("userEmailLabel")
                 }
-            case .error(let error):
+            case let .error(error):
                 Text(error.localizedDescription)
                     .foregroundStyle(.red)
             case .loading:
