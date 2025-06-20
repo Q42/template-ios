@@ -5,8 +5,8 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Foundation
 import Factory
+import Foundation
 
 class GetUserUseCase {
     @Injected(\.userRepository) var userRepository: UserRepositoryProtocol

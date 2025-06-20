@@ -5,8 +5,8 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import XCTest
 import Salad
+import XCTest
 
 final class ExampleUITests: XCTestCase {
     var scenario: Scenario<HomeView>!

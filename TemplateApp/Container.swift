@@ -5,8 +5,8 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Foundation
 import Factory
+import Foundation
 
 extension Container: @retroactive AutoRegistering {
     public func autoRegister() {
@@ -18,7 +18,6 @@ extension Container: @retroactive AutoRegistering {
 }
 
 extension Container {
-
     // MARK: User
 
     var userRepository: Factory<UserRepositoryProtocol> {

@@ -5,8 +5,8 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Testing
 @testable import TemplateApp
+import Testing
 
 struct ExampleTests {
     @Test func example() throws {

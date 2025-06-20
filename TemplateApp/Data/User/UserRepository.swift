@@ -5,8 +5,8 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Foundation
 import Factory
+import Foundation
 
 class UserRepository: UserRepositoryProtocol {
     @Injected(\.userLocalDataSource) var userLocalDataSource

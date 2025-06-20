@@ -1,5 +1,5 @@
 //
-//  RefreshBehavior.swift
+//  RefreshBehaviour.swift
 //  TemplateAppUITests
 //
 //  Copyright © 2024 Q42. All rights reserved.
