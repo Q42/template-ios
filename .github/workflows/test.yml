@@ -14,6 +14,11 @@ env:
   TEST_PLAN: AllTests
   TEST_RESULT_BUNDLE: TestResults.xcresult
 
+  # iOS Simulator configuration
+  TEST_PLATFORM: 'iOS Simulator'
+  TEST_DEVICE_TYPE: 'iPhone 16'
+  TEST_DEVICE_RUNTIME: 'iOS26'
+
 jobs:
   build:
     name: Run all tests
@@ -21,8 +26,7 @@ jobs:
     runs-on: [macos-26]
 
     env:
-        PLATFORM: 'iOS Simulator'
-        DEVICE: 'iPhone 16'
+      TEST_DEVICE_NAME: 'TestDevice'
 
     steps:
     - name: Checkout
@@ -36,7 +40,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: latest-stable
+        xcode-version: '26'
 
     - name: Trust Xcode package plugins and macros
       run: |
@@ -74,12 +78,20 @@ jobs:
           -resolvePackageDependencies \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages"
 
+    - name: Create iOS Simulator
+      # Usage: simctl create <name> <device type id> [<runtime id>]
+      # <name>            A name you choose for the new simulator. Example: "TestDevice".
+      # <device type id>  A valid available device type. Find these by running "xcrun simctl list devicetypes". Example: "iPhone 8".
+      # <runtime id>      A valid and available runtime. Find these by running "xcrun simctl list runtimes". Example: "iOS 18.6".
+      run: |
+        xcrun simctl create "${{ env.TEST_DEVICE_NAME }}" "${{ env.TEST_DEVICE_TYPE }}" "${{ env.TEST_DEVICE_RUNTIME }}"
+
     - name: Build for testing
       run: |
         xcodebuild build-for-testing \
           -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
-          -destination "platform=$PLATFORM,name=$DEVICE" \
+          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
           -disableAutomaticPackageResolution
 
@@ -89,7 +101,7 @@ jobs:
           -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
-          -destination "platform=$PLATFORM,name=$DEVICE" \
+          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
           -disableAutomaticPackageResolution | xcpretty
