@@ -1,10 +1,17 @@
-name: Run tests and deploy to TestFlight
+name: Deploy to TestFlight
 
 on:
+  # Uncomment to enable a nightly build
+  # schedule:
+  #   - cron: '0 2 * * 1-5' # run on weekdays at 2 AM UTC
+
+  # Show a manual trigger button in the GitHub Actions UI
   workflow_dispatch:
-  # Uncomment this to run the workflow on every push to the main branch:
-  # push:
-  #   branches: ["main"]
+
+  # Trigger on pushes to release branches
+  push:
+    branches:
+      - 'release/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,14 +27,16 @@ env:
 
 jobs:
   build:
-    name: Run tests and deploy to TestFlight
-    runs-on: [macos-15]
-  
+    name: Deploy to TestFlight
+    # To use the self-hosted runner, change to `runs-on: [self-hosted, macOS]`
+    runs-on: [macos-26]
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - uses: maxim-lobanov/setup-xcode@v1
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
 
@@ -35,6 +44,21 @@ jobs:
       run: |
         defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
         defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
+
+    # Uncomment when using Cocoapods (legacy). Don't forget to change the `-project` flag to `-workspace` in the xcodebuild commands below.
+    # - name: Cache Cocoapods
+    #   uses: actions/cache@v4
+    #   id: cocoapods-cache
+    #   with:
+    #     path: Pods
+    #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-pods-
+
+    # - name: Install Cocoapods
+    #   if: steps.cocoapods-cache.outputs.cache-hit != 'true'
+    #   run: |
+    #     pod install
 
     - name: Cache Swift Package Manager dependencies
       uses: actions/cache@v4
@@ -61,20 +85,22 @@ jobs:
 
     - name: Install App Store Connect API key
       run: |
-        echo -n "${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}" | base64 --decode -o "${{ runner.temp }}/AuthKey.p8"
+        APP_STORE_CONNECT_API_KEY_PATH="${{ runner.temp }}/AuthKey.p8"
+        echo "APP_STORE_CONNECT_API_KEY_PATH=$APP_STORE_CONNECT_API_KEY_PATH" >> $GITHUB_ENV
+        echo -n "${{ secrets.APP_STORE_CONNECT_API_KEY_BASE64 }}" | base64 --decode -o "$APP_STORE_CONNECT_API_KEY_PATH"
 
     - name: Run tests
       env:
         PLATFORM: 'iOS Simulator'
         DEVICE: 'iPhone 16'
       run: |
-        set -o pipefail && xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
+        xcodebuild test -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
           -destination "platform=$PLATFORM,name=$DEVICE" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution | xcpretty
+          -disableAutomaticPackageResolution
 
     - name: Upload test result bundle
       uses: actions/upload-artifact@v4
@@ -85,22 +111,23 @@ jobs:
 
     - name: Archive build
       run: |
-        set -o pipefail && xcodebuild clean archive -project "${{ env.XCODE_PROJECT }}" \
+        xcodebuild clean archive \
+          -project "${{ env.XCODE_PROJECT }}"
           -scheme "${{ env.SCHEME }}" \
           -destination generic/platform=iOS \
           -archivePath "${{ runner.temp }}/${{ env.ARCHIVE_PATH }}" \
           -allowProvisioningUpdates \
-          -authenticationKeyPath "${{ runner.temp }}/AuthKey.p8" \
+          -authenticationKeyPath "${{ env.APP_STORE_CONNECT_API_KEY_PATH }}" \
           -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
           -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }} \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution | xcpretty
+          -disableAutomaticPackageResolution
 
     - name: Upload to TestFlight
       run: |
         xcodebuild -exportArchive \
           -allowProvisioningUpdates \
-          -authenticationKeyPath "${{ runner.temp }}/AuthKey.p8" \
+          -authenticationKeyPath "${{ env.APP_STORE_CONNECT_API_KEY_PATH }}" \
           -authenticationKeyID ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} \
           -authenticationKeyIssuerID ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }} \
           -archivePath "${{ runner.temp }}/${{ env.ARCHIVE_PATH }}" \
