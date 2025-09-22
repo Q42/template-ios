@@ -104,7 +104,7 @@ jobs:
           -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
-          -disableAutomaticPackageResolution | xcpretty
+          -disableAutomaticPackageResolution
 
     - name: Upload test result bundle
       uses: actions/upload-artifact@v4
