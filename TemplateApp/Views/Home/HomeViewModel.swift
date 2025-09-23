@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-@MainActor class HomeViewModel {
+class HomeViewModel {
     var state: HomeViewState = .empty
 
     func refresh() async {
