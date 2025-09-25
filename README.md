@@ -13,11 +13,11 @@ This is a template for creating iOS projects at Q42. It has opinionated defaults
 
 Only basic features that almost all projects use, were added in this template:
 
-* SwiftUI using the SwiftUI lifecycle with an AppDelegate
-* Implementation of the Clean Architecture
-* Dependency injection using the library Factory
-* Unit tests and UI tests using Salad
-* GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
+- SwiftUI using the SwiftUI lifecycle with an AppDelegate
+- Implementation of the Clean Architecture
+- Dependency injection using the library Factory
+- Unit tests and UI tests using Salad
+- GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
 
 Xcode 26 or higher is required.
 
@@ -74,38 +74,38 @@ We use [Factory](https://github.com/hmlongco/Factory) as a DI container.
 
 ### Modules & libraries
 
-* Preferably use the Swift Package Manager for dependencies. Use other package managers only if there's no other option.
-* Only extract code into a package if there are strong reasons to do so. For example:
-    * It is used from at least two different targets/packages, or is a candidate to be extracted to an open-source package.
-    * It is completely self-contained.
+- Preferably use the Swift Package Manager for dependencies. Use other package managers only if there's no other option.
+- Only extract code into a package if there are strong reasons to do so. For example:
+  - It is used from at least two different targets/packages, or is a candidate to be extracted to an open-source package.
+  - It is completely self-contained.
 
 When choosing a third-party library, prefer libraries that:
 
-* Are written in idiomatic Swift or Objective-C that sticks to best practices.
-* Have as few dependencies of its own as possible. Preferably none.
-* Aren't too big, in order to keep compile times and bloat in check.
+- Are written in idiomatic Swift or Objective-C that sticks to best practices.
+- Have as few dependencies of its own as possible. Preferably none.
+- Aren't too big, in order to keep compile times and bloat in check.
 
 ### Testing
 
-* For business logic, we write unit tests.
-* For testing the user interface, we write UI tests in a behaviour-driven way using the [Salad](https://github.com/Q42/Salad) library.
-* Tests are run on CI (GitHub Actions). Tests must pass before a PR may be merged and before any sort of build is created.
+- For business logic, we write unit tests.
+- For testing the user interface, we write UI tests in a behaviour-driven way using the [Salad](https://github.com/Q42/Salad) library.
+- Tests are run on CI (GitHub Actions). Tests must pass before a PR may be merged and before any sort of build is created.
 
 ### Views
 
-* Keep views focused (single-responsibility principle from SOLID). When a view becomes large a, split it up into smaller views.
-* Every view gets a UI preview if at all possible. The preview should show the view in different states using dummy data.
-* We use [custom SF Symbols](https://developer.apple.com/documentation/uikit/uiimage/creating_custom_symbol_images_for_your_app/) whenever a custom icon is needed, so that they render in a consistent manner. 
+- Keep views focused (single-responsibility principle from SOLID). When a view becomes large a, split it up into smaller views.
+- Every view gets a UI preview if at all possible. The preview should show the view in different states using dummy data.
+- We use [custom SF Symbols](https://developer.apple.com/documentation/uikit/uiimage/creating_custom_symbol_images_for_your_app/) whenever a custom icon is needed, so that they render in a consistent manner.
 
 ### Accessibility
 
-* Every new component or control should be audited for basic accessibility support:
-    * Dynamic type size support
-    * VoiceOver support
-* Also consider:
-    * Bold text support
-    * High contrast support
-* Use `accessibilityRepresentation` on custom controls to make them accessible. 
+- Every new component or control should be audited for basic accessibility support:
+  - Dynamic type size support
+  - VoiceOver support
+- Also consider:
+  - Bold text support
+  - High contrast support
+- Use `accessibilityRepresentation` on custom controls to make them accessible.
 
 ### Localization
 
@@ -113,8 +113,8 @@ String catalogs are used to localize the project. The default languages supporte
 
 ### Async code
 
-* `async`/`await` is preferred over Combine/Promises/etc. to leverage the compiler concurrency checking.
-* [Combine](https://developer.apple.com/documentation/combine) can be used when `async`/`await` or `AsyncSequence` fall short, and more complexity is needed to solve the problem at hand.
+- `async`/`await` is preferred over Combine/Promises/etc. to leverage the compiler concurrency checking.
+- [Combine](https://developer.apple.com/documentation/combine) can be used when `async`/`await` or `AsyncSequence` fall short, and more complexity is needed to solve the problem at hand.
 
 ## Continuous integration
 
@@ -126,11 +126,11 @@ On a push to the `main` branch, it will also run the tests, and if they pass, a 
 Five environment secrets are needed for the workflow to run on GitHub Actions.
 You may configure these in the repository secret settings on GitHub.
 
-* `BUILD_CERTIFICATE_BASE64` contains a base64-encoded string of the .p12 certificate bundle, used to code sign the app. This bundle needs to contain two certificates: **development** and **distribution**.
-* `P12_PASSWORD` contains the password of the certificate bundle.
-* `APP_STORE_CONNECT_API_KEY_BASE64` contains a base64-encoded string of the .p8 App Store Connect API key.
-* `APP_STORE_CONNECT_API_KEY_ID` contains the key ID of the App Store Connect API key.
-* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` contains the issuer ID of the App Store Connect API key.
+- `BUILD_CERTIFICATE_BASE64` contains a base64-encoded string of the .p12 certificate bundle, used to code sign the app. This bundle needs to contain two certificates: **development** and **distribution**.
+- `P12_PASSWORD` contains the password of the certificate bundle.
+- `APP_STORE_CONNECT_API_KEY_BASE64` contains a base64-encoded string of the .p8 App Store Connect API key.
+- `APP_STORE_CONNECT_API_KEY_ID` contains the key ID of the App Store Connect API key.
+- `APP_STORE_CONNECT_API_KEY_ISSUER_ID` contains the issuer ID of the App Store Connect API key.
 
 To create such a certificate bundle, open Keychain Access. Unfold the entries for the development and distribution certificate. Select the certificates and their private keys using shift, then right-click and select "Export 4 items...".
 
