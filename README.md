@@ -135,3 +135,49 @@ You may configure these in the repository secret settings on GitHub.
 To create such a certificate bundle, open Keychain Access. Unfold the entries for the development and distribution certificate. Select the certificates and their private keys using shift, then right-click and select "Export 4 items...".
 
 You can encode a file to base64 on the command line like this: `base64 -i ~/Desktop/Certificates.p12 | pbcopy`. This automatically puts the result on your clipboard.
+
+## Release process
+
+The process of releasing a new version of an app goes as follows.
+
+### Increment version number and commit
+
+First, a new version number is picked for the app. The version numbering convention is up to the project team to decide. [Semantic Versioning](https://semver.org/) may be used. For example, given a version number `MAJOR.MINOR.PATCH`, increment the:
+
+- MAJOR version when you make changes that impact the user's workflow of the app
+- MINOR version when you add functionality
+- PATCH version when you make bug fixes
+
+Set this version number in the Xcode project settings and commit it.
+
+### Create release branch
+
+Create a branch `release/<version>` in which `<version>` is the new version number.
+Push the branch to GitHub and create a pull request.
+GitHub Actions will automatically create a release build for you and upload it to App Store Connect. You can distribute this build to TestFlight if you want.
+
+Any last-minute changes before the release goes out may be committed to this branch.
+
+### Create GitHub release
+
+In the Releases section of the project on GitHub, draft a new release.
+For the **tag** field, enter the new version number. For the **target** field, select the release branch that you've created earlier.
+
+You can automatically generate the (internal) release notes. It will include a list of all the PRs that were merged.
+
+**Save the release as a draft** so that GitHub doesn't add a tag for it yet.
+
+### Release to the App Store
+
+Create a new version of the App in App Store Connect using the new version number.
+Select the build of the app that GitHub Actions has created earlier. 
+Update the App Store metadata (screenshots, description) as needed. Enter the public release notes.
+
+Then submit to the App Store.
+
+### Finalise GitHub release
+
+In the Releases section of the project on GitHub, publish your release, checking the "Set as the latest release" checkbox.
+Add the public release notes to the changelog if you'd like.
+
+All done! :rocket:
