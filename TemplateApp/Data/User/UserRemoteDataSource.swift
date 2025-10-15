@@ -9,7 +9,7 @@ import Foundation
 
 class UserRemoteDataSource {
     func getUser() async throws -> UserEntity {
-        try await Task.sleep(seconds: 1.0)
+        try await Task.sleep(for: .seconds(1.0))
         return UserEntity(email: "example@q42.com")
     }
 }

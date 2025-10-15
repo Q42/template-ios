@@ -106,12 +106,12 @@ extension AsyncButton where Label == Image {
 
 #Preview("Slow action") {
     AsyncButton(verbatim: "Async Button") {
-        try? await Task.sleep(seconds: 3)
+        try? await Task.sleep(for: .seconds(3))
     }
 }
 
 #Preview("Fast action") {
     AsyncButton(verbatim: "Async Button") {
-        try? await Task.sleep(seconds: 0.1)
+        try? await Task.sleep(for: .seconds(0.1))
     }
 }
