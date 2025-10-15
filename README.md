@@ -6,15 +6,18 @@ This is a template for creating iOS projects at Q42. It has opinionated defaults
 
 1. Click the green "Use this template" button in the Github repo to create your own repository with this code template.
 1. Clone the new repo locally on your machine.
-1. Run `python3 ./scripts/rename-project.py` from the project root, to change the project name. The script will ask for your new project name. You can delete the script afterwards.
-1. Optional: Configure GitHub Actions for TestFlight and App Store builds. Edit `build.yml` to enable the workflow trigger. Set an App Store Connect API key and signing certificate in your GitHub Actions Secrets as described in this readme under [CI configuration](#ci-configuration).
+1. Run `python3 ./scripts/rename-project.py` from the project root to change the project name.
+    - Delete the script afterwards: `rm ./scripts/rename-project.py`.
+1. Optional: Configure GitHub Actions for TestFlight and App Store builds.
+    - Edit `build.yml` to enable the workflow trigger.
+    - Set an App Store Connect API key and signing certificate in your GitHub Actions Secrets as described in this readme under [CI configuration](#ci-configuration).
 
 ## Features
 
-Only basic features that almost all projects use, were added in this template:
+Only basic features that almost all projects use were added to this template:
 
 - SwiftUI using the SwiftUI lifecycle with an AppDelegate
-- Implementation of the Clean Architecture
+- Implementation of Clean Architecture
 - Dependency injection using the library Factory
 - Unit tests and UI tests using Salad
 - GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
@@ -28,12 +31,14 @@ For linting Swift source code, we use [SwiftLint](https://github.com/realm/Swift
 A configuration for [SwiftFormat](http://github.com/nicklockwood/SwiftFormat) is also included.
 
 To install and run the formatter:
+
 ```bash
 brew install swiftformat
 swiftformat .
 ```
 
 To install and run the linter:
+
 ```bash
 brew install swiftlint
 swiftlint . --fix
@@ -62,7 +67,7 @@ We use the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13
 #### Use cases
 
 - Use cases are single-purpose: GetUserUseCase, but also: GetUserWithArticlesUseCase.
-- Use cases can call other use-cases.
+- Use cases can call other use cases.
 - Use cases do not have persistent state. They are instantiated, called to perform their function once or multiple times, and are then discarded.
 
 #### Dependency injection
@@ -83,7 +88,7 @@ When choosing a third-party library, prefer libraries that:
 
 - Are written in idiomatic Swift or Objective-C that sticks to best practices.
 - Have as few dependencies of its own as possible. Preferably none.
-- Aren't too big, in order to keep compile times and bloat in check.
+- Aren't too big, so as to keep compile times and bloat in check.
 
 ### Testing
 
@@ -93,7 +98,7 @@ When choosing a third-party library, prefer libraries that:
 
 ### Views
 
-- Keep views focused (single-responsibility principle from SOLID). When a view becomes large a, split it up into smaller views.
+- Keep views focused (single-responsibility principle from SOLID). When a view becomes large, split it up into smaller views.
 - Every view gets a UI preview if at all possible. The preview should show the view in different states using dummy data.
 - We use [custom SF Symbols](https://developer.apple.com/documentation/uikit/uiimage/creating_custom_symbol_images_for_your_app/) whenever a custom icon is needed, so that they render in a consistent manner.
 
@@ -107,9 +112,9 @@ When choosing a third-party library, prefer libraries that:
   - High contrast support
 - Use `accessibilityRepresentation` on custom controls to make them accessible.
 
-### Localization
+### Localisation
 
-String catalogs are used to localize the project. The default languages supported are English and Dutch.
+String catalogues are used to localise the project. The default languages supported are English and Dutch.
 
 ### Async code
 
@@ -135,3 +140,51 @@ You may configure these in the repository secret settings on GitHub.
 To create such a certificate bundle, open Keychain Access. Unfold the entries for the development and distribution certificate. Select the certificates and their private keys using shift, then right-click and select "Export 4 items...".
 
 You can encode a file to base64 on the command line like this: `base64 -i ~/Desktop/Certificates.p12 | pbcopy`. This automatically puts the result on your clipboard.
+
+## Release process
+
+The process of releasing a new version of an app goes as follows.
+
+### 1. Increment version number and commit
+
+First, a new version number is picked for the app. The version numbering convention is up to the project team to decide. [Semantic Versioning](https://semver.org/) may be used. For example, given a version number `MAJOR.MINOR.PATCH`, increment the:
+
+- MAJOR version when you make changes that impact the user's workflow of the app
+- MINOR version when you add functionality
+- PATCH version when you make bug fixes
+
+Set this version number in the Xcode project settings and commit it.
+
+### 2. Create release branch
+
+Create a branch `release/<version>` in which `<version>` is the new version number.
+Push the branch to GitHub and create a pull request.
+GitHub Actions will automatically create a release build for you and upload it to App Store Connect. You can distribute this build to TestFlight if you want.
+
+Any last-minute changes before the release goes out may be committed to this branch.
+
+### 3. Create GitHub release
+
+In the Releases section of the project on GitHub, draft a new release.
+For the **tag** field, enter the new version number. For the **target** field, select the release branch that you've created earlier.
+
+You can automatically generate the (internal) release notes. It will include a list of all the PRs that were merged.
+
+**Save the release as a draft** so that GitHub doesn't add a tag for it yet.
+
+### 4. Release to the App Store
+
+Create a new version of the App in App Store Connect using the new version number.
+Select the build of the app that GitHub Actions has created earlier.
+Update the App Store metadata (screenshots, description) as needed. Enter the public release notes.
+
+Then submit to the App Store.
+
+### 5. Finalise GitHub release
+
+In the Releases section of the project on GitHub, publish your release, checking the "Set as the latest release" checkbox.
+Add the public release notes to the changelog if you'd like.
+
+Finally, merge the release branch to main.
+
+All done! :rocket:
