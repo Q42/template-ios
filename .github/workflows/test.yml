@@ -18,6 +18,8 @@ env:
   TEST_PLATFORM: 'iOS Simulator'
   TEST_DEVICE_TYPE: 'iPhone 16'
   TEST_DEVICE_RUNTIME: 'iOS26'
+  TEST_DEVICE_OS: '26.0'
+  TEST_DEVICE_NAME: 'TestDevice'
 
 jobs:
   build:
@@ -91,7 +93,7 @@ jobs:
         xcodebuild build-for-testing \
           -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
-          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}" \
+          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }},OS=${{ env.TEST_DEVICE_OS }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
           -disableAutomaticPackageResolution
 
@@ -101,7 +103,7 @@ jobs:
           -project "${{ env.XCODE_PROJECT }}" \
           -scheme "${{ env.SCHEME }}" \
           -testPlan "${{ env.TEST_PLAN }}" \
-          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }}" \
+          -destination "platform=${{ env.TEST_PLATFORM }},name=${{ env.TEST_DEVICE_NAME }},OS=${{ env.TEST_DEVICE_OS }}" \
           -resultBundlePath "${{ env.TEST_RESULT_BUNDLE }}" \
           -clonedSourcePackagesDirPath "${{ runner.temp }}/SourcePackages" \
           -disableAutomaticPackageResolution
