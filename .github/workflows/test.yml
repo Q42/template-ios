@@ -26,6 +26,7 @@ jobs:
     name: Run all tests
     # To use the self-hosted runner, change to `runs-on: [self-hosted, macOS]`
     runs-on: [macos-26]
+    timeout-minutes: 60
 
     env:
       TEST_DEVICE_NAME: 'TestDevice'
