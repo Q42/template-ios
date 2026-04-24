@@ -1,0 +1,8 @@
+# This code owners file defines which individuals or teams are responsible for code in the repository.
+# Code reviews will automatically be requested based on the rules in this file.
+#
+# For documentation about the file format, see:
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# The iOS team at Q42 maintains this repo.
+*     @q42/ios-developers
