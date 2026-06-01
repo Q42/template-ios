@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D58BA4CE2BEE6501000D8420 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = D58BA4CD2BEE6501000D8420 /* Factory */; };
 		D5F745F52BEE48BC0064F06A /* Salad in Frameworks */ = {isa = PBXBuildFile; productRef = D5F745F42BEE48BC0064F06A /* Salad */; };
+		E8DAE98B2FCD8D5A00862F6F /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = E8DAE98A2FCD8D5A00862F6F /* Dependencies */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +72,7 @@
 		D5284F292B57C6B600BB32E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				D58BA4CE2BEE6501000D8420 /* Factory in Frameworks */,
+				E8DAE98B2FCD8D5A00862F6F /* Dependencies in Frameworks */,
 			);
 		};
 		D5284F392B57C6B700BB32E7 /* Frameworks */ = {
@@ -131,7 +131,7 @@
 			);
 			name = TemplateApp;
 			packageProductDependencies = (
-				D58BA4CD2BEE6501000D8420 /* Factory */,
+				E8DAE98A2FCD8D5A00862F6F /* Dependencies */,
 			);
 			productName = TemplateApp;
 			productReference = D5284F2C2B57C6B600BB32E7 /* TemplateApp.app */;
@@ -217,7 +217,7 @@
 			mainGroup = D5284F232B57C6B600BB32E7;
 			packageReferences = (
 				D5F745F32BEE48BC0064F06A /* XCRemoteSwiftPackageReference "Salad" */,
-				D58BA4CC2BEE6501000D8420 /* XCRemoteSwiftPackageReference "Factory" */,
+				E8DAE9892FCD8D5A00862F6F /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D5284F2D2B57C6B600BB32E7 /* Products */;
@@ -580,14 +580,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D58BA4CC2BEE6501000D8420 /* XCRemoteSwiftPackageReference "Factory" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hmlongco/Factory.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.3;
-			};
-		};
 		D5F745F32BEE48BC0064F06A /* XCRemoteSwiftPackageReference "Salad" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Q42/Salad.git";
@@ -596,18 +588,26 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E8DAE9892FCD8D5A00862F6F /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D58BA4CD2BEE6501000D8420 /* Factory */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D58BA4CC2BEE6501000D8420 /* XCRemoteSwiftPackageReference "Factory" */;
-			productName = Factory;
-		};
 		D5F745F42BEE48BC0064F06A /* Salad */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D5F745F32BEE48BC0064F06A /* XCRemoteSwiftPackageReference "Salad" */;
 			productName = Salad;
+		};
+		E8DAE98A2FCD8D5A00862F6F /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8DAE9892FCD8D5A00862F6F /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
