@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct TemplateAppApp: App {
+    @Dependency(\.context) var context
     @UIApplicationDelegateAdaptor var appDelegate: TemplateAppAppDelegate
 
     init() {
@@ -26,6 +27,11 @@ struct TemplateAppApp: App {
         // don't bootstrap the app if we're testing
         guard context == .live else { return }
 
-        // TODO: Set up dependencies
+        prepareDependencies {
+            $0.userRepository = UserRepository(
+                userLocalDataSource: UserLocalDataSource(),
+                userRemoteDataSource: UserRemoteDataSource()
+            )
+        }
     }
 }
