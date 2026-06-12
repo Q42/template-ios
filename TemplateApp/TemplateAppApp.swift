@@ -32,6 +32,8 @@ struct TemplateAppApp: App {
                 userLocalDataSource: UserLocalDataSource(),
                 userRemoteDataSource: UserRemoteDataSource()
             )
+
+            $0.todoRepository = TodoRepository()
         }
     }
 }
