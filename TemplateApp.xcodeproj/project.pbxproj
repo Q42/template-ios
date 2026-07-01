@@ -585,7 +585,7 @@
 			repositoryURL = "https://github.com/hmlongco/Factory.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.3;
+				minimumVersion = 3.2.1;
 			};
 		};
 		D5F745F32BEE48BC0064F06A /* XCRemoteSwiftPackageReference "Salad" */ = {
