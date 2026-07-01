@@ -5,11 +5,11 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Factory
+import Dependencies
 import Foundation
 
 class GetUserUseCase {
-    @Injected(\.userRepository) var userRepository: UserRepositoryProtocol
+    @Dependency(\.userRepository) var userRepository
 
     func invoke() async throws -> UserModel {
         try await userRepository.getUser()

@@ -75,7 +75,7 @@ We use the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13
 Dependency injection (DI) means that objects don't instantiate the objects or configurations that they require themselves, but they are passed in from the outside.
 This is useful, because it makes code easier to test and easier to change. It promotes good separation of concerns.
 
-We use [Factory](https://github.com/hmlongco/Factory) as a DI container.
+We use [Swift Dependencies](https://github.com/pointfreeco/swift-dependencies) by PointFree as a DI container.
 
 ### Modules & libraries
 

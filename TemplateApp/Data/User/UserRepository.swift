@@ -5,13 +5,18 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Factory
+import Dependencies
 import Foundation
 
-class UserRepository: UserRepositoryProtocol {
-    @Injected(\.userLocalDataSource) var userLocalDataSource
-    @Injected(\.userRemoteDataSource) var userRemoteDataSource
+final class UserRepository: UserRepositoryProtocol {
+    private let userLocalDataSource: UserLocalDataSource
+    private let userRemoteDataSource: UserRemoteDataSource
 
+    init(userLocalDataSource: UserLocalDataSource, userRemoteDataSource: UserRemoteDataSource) {
+        self.userLocalDataSource = userLocalDataSource
+        self.userRemoteDataSource = userRemoteDataSource
+    }
+    
     func getUser() async throws -> UserModel {
         let userEntity = try await userRemoteDataSource.getUser()
         userLocalDataSource.setUser(userEntity: userEntity)
@@ -19,3 +24,4 @@ class UserRepository: UserRepositoryProtocol {
         return user
     }
 }
+

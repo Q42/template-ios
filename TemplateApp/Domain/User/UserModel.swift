@@ -7,6 +7,7 @@
 
 import Foundation
 
+nonisolated
 struct UserModel {
     let email: String
 }
