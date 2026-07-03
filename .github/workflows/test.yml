@@ -1,12 +1,12 @@
 name: Run tests
 
 on:
-  # Run on pull requests that target the main branch
-  pull_request:
-    branches: ["main"]
+  # Run on pushes to the main branch
+  push:
+    branches: [ "main" ]
 
-  # Show a manual trigger button in the GitHub Actions UI
-  workflow_dispatch:
+  # Run for any pull request
+  pull_request:
 
 env:
   XCODE_VERSION: '26'
