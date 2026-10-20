@@ -27,7 +27,7 @@ jobs:
   build:
     name: Deploy to TestFlight
     # To use the self-hosted runner, change to `runs-on: [self-hosted, macOS]`
-    runs-on: [macos-26]
+    runs-on: [xcode-27]
 
     steps:
     - name: Checkout
