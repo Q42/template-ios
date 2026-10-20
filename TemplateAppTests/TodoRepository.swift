@@ -7,6 +7,7 @@
 //
 
 import Dependencies
+import DependenciesTestSupport
 import Foundation
 @testable import TemplateApp
 import Testing

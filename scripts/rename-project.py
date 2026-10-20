@@ -57,7 +57,7 @@ def replace_project_name_occurences_in_file(filename):
                     file.close()
 
 for root, dirs, files in os.walk(folder, topdown=False):
-    allowed_extensions = ["swift", "plist", "yml", "pbxproj", "storyboard", "xctestplan", "xcscheme"]
+    allowed_extensions = ["swift", "plist", "yml", "xcproj", "storyboard", "xctestplan", "xcscheme"]
     for name in files:
         extension = name.split(".")[-1]
         if extension in allowed_extensions:

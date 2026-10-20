@@ -1,3 +1,5 @@
 --disable unusedArguments
 --disable redundantRawValues
 --indent 4
+--swift-version 6.4
+--language-mode 6

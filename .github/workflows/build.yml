@@ -18,7 +18,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  XCODE_VERSION: '26'
   XCODE_PROJECT: TemplateApp.xcodeproj
   SCHEME: TemplateApp
   ARCHIVE_PATH: TemplateApp.xcarchive
@@ -34,10 +33,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v7
 
+    - name: Read Xcode version
+      id: xcode-version
+      run: echo "version=$(cat .xcode-version)" >> "$GITHUB_OUTPUT"
+
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: ${{ env.XCODE_VERSION }}
+        xcode-version: ${{ steps.xcode-version.outputs.version }}
 
     - name: Trust Xcode package plugins and macros
       run: |
