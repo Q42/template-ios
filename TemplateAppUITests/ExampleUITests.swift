@@ -8,13 +8,12 @@
 import XCTest
 
 final class ExampleUITests: XCTestCase {
-
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
 
     @MainActor
-    func testRefreshShowsUserEmail() throws {
+    func testRefreshShowsUserEmail() {
         let app = XCUIApplication()
         app.launch()
 

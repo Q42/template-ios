@@ -29,7 +29,6 @@ extension DependencyValues {
     }
 }
 
-nonisolated private enum TodoRepositoryKey: TestDependencyKey {
+private nonisolated enum TodoRepositoryKey: TestDependencyKey {
     static let testValue: TodoRepositoryProtocol = MockTodoRepository()
 }
-

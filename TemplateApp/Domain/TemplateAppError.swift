@@ -12,5 +12,7 @@ struct TemplateAppError: Error {
 }
 
 extension TemplateAppError: LocalizedError {
-    var errorDescription: String? { message }
+    var errorDescription: String? {
+        message
+    }
 }
