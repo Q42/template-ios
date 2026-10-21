@@ -7,6 +7,7 @@
 //
 
 import Dependencies
+import DependenciesTestSupport
 import Foundation
 @testable import TemplateApp
 import Testing
@@ -14,7 +15,7 @@ import Testing
 /// Because of default actor isolation on the main target, this suite runs on the main actor, too.
 @MainActor
 struct TodoRepositoryTests {
-    @Test func testSaveTodoUsesUUIDDependency() {
+    @Test func `save todo uses UUID dependency`() {
         let repository = withDependencies {
             $0.uuid = .incrementing
         } operation: {

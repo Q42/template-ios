@@ -7,6 +7,7 @@
 //
 
 import Dependencies
+import DependenciesTestSupport
 @testable import TemplateApp
 import Testing
 
@@ -15,7 +16,7 @@ struct GetUserUseCaseTests {
         "mock@user.repository.com",
         "mathijs@q42.nl",
     ])
-    func testGetValidUser(email: String) async throws {
+    func `get valid user`(email: String) async throws {
         let mockUserRepository = MockUserRepository(user: .init(email: email))
         let useCase = withDependencies {
             $0.userRepository = mockUserRepository

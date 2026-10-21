@@ -18,7 +18,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  XCODE_VERSION: '26'
   XCODE_PROJECT: TemplateApp.xcodeproj
   SCHEME: TemplateApp
   ARCHIVE_PATH: TemplateApp.xcarchive
@@ -28,7 +27,7 @@ jobs:
   build:
     name: Deploy to TestFlight
     # To use the self-hosted runner, change to `runs-on: [self-hosted, macOS]`
-    runs-on: [macos-26]
+    runs-on: [xcode-27]
 
     steps:
     - name: Checkout
@@ -37,7 +36,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: ${{ env.XCODE_VERSION }}
+        xcode-version: "27.2-beta"
 
     - name: Trust Xcode package plugins and macros
       run: |

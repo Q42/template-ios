@@ -1,3 +1,8 @@
 --disable unusedArguments
 --disable redundantRawValues
+--disable wrapMultilineStatementBraces
+--disable opaqueGenericParameters
 --indent 4
+--trailing-commas collections-only
+--swift-version 6.4
+--language-mode 6

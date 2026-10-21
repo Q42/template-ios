@@ -16,12 +16,10 @@ final class UserRepository: UserRepositoryProtocol {
         self.userLocalDataSource = userLocalDataSource
         self.userRemoteDataSource = userRemoteDataSource
     }
-    
+
     func getUser() async throws -> UserModel {
         let userEntity = try await userRemoteDataSource.getUser()
         userLocalDataSource.setUser(userEntity: userEntity)
-        let user = UserModel(userEntity: userEntity)
-        return user
+        return UserModel(userEntity: userEntity)
     }
 }
-

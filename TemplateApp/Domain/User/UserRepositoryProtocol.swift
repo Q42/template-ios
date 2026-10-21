@@ -14,8 +14,7 @@ protocol UserRepositoryProtocol: AnyObject, Sendable {
 final class MockUserRepository: UserRepositoryProtocol {
     var user: UserModel
 
-    nonisolated
-    init(user: UserModel = UserModel(email: "mock@user.repository.com")) {
+    nonisolated init(user: UserModel = UserModel(email: "mock@user.repository.com")) {
         self.user = user
     }
 
@@ -35,6 +34,6 @@ extension DependencyValues {
     }
 }
 
-nonisolated private enum UserRepositoryKey: TestDependencyKey {
+private nonisolated enum UserRepositoryKey: TestDependencyKey {
     static let testValue: UserRepositoryProtocol = MockUserRepository()
 }

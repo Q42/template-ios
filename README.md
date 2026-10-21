@@ -18,11 +18,11 @@ Only basic features that almost all projects use were added to this template:
 
 - SwiftUI using the SwiftUI lifecycle with an AppDelegate
 - Implementation of Clean Architecture
-- Dependency injection using the library Factory
+- Dependency injection using [swift-dependencies by Pointfree](https://github.com/pointfreeco/swift-dependencies)
 - Unit tests and UI tests using Salad
 - GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
 
-Xcode 26 or higher is required.
+Xcode 27.2 or higher is required.
 
 ## Code style
 
@@ -48,7 +48,7 @@ swiftlint . --fix
 
 ### Core principles
 
-This app is built using SwiftUI and targets iOS 15 and higher. We use SwiftUI as much as possible, but fall back to UIKit views using view(controller) representables where needed.
+This app is built using SwiftUI and targets the Apple-recommended iOS version by default. We use SwiftUI as much as possible, but fall back to UIKit views using view(controller) representables where needed.
 
 We try to stick to the Apple conventions and write idiomatic SwiftUI code. Do things the Apple way. Lean in to the platform instead of fighting it.
 

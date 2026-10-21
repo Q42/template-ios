@@ -9,7 +9,7 @@
 import Testing
 
 struct ExampleTests {
-    @Test func example() throws {
+    @Test func example() {
         #expect(21 * 2 == 42, "Multiplication should work")
     }
 }

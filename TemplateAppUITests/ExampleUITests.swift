@@ -5,34 +5,29 @@
 //  Copyright © 2024 Q42. All rights reserved.
 //
 
-import Salad
 import XCTest
 
 final class ExampleUITests: XCTestCase {
-    var scenario: Scenario<HomeView>!
-
-    override func setUp() {
+    override func setUpWithError() throws {
         continueAfterFailure = false
-
-        let app = XCUIApplication()
-        // Custom launch arguments can be set here
-        // app.launchArguments = ["testing"]
-        app.launch()
-        // A scenario provides the starting point of your tests ('GIVEN <screen>'). In each test case,
-        // you chain behaviors ('WHEN I do <action>') and assertions ('THEN I expect <result>') using the scenario.
-        scenario = Scenario(given: app)
     }
 
-    func testExample() {
-        // Example of a behavior-driven test
-        scenario
-            .then { homeView in
-                XCTAssertFalse(homeView.userEmailLabel.exists)
-            }
-            .when(RefreshHomeView())
-            .then { homeView in
-                XCTAssertTrue(homeView.userEmailLabel.waitForExist(timeout: .fastNetworkCall))
-                XCTAssertEqual(homeView.userEmailLabel.label, "example@q42.com")
-            }
+    @MainActor
+    func testRefreshShowsUserEmail() {
+        let app = XCUIApplication()
+        app.launch()
+
+        let homeView = app.otherElements["HomeView"]
+        let userEmailLabel = homeView.staticTexts["userEmailLabel"]
+        let refreshButton = homeView.buttons["refreshButton"]
+
+        XCTAssertTrue(homeView.waitForExistence(timeout: 5))
+        XCTAssertFalse(userEmailLabel.exists)
+
+        refreshButton.tap()
+
+        // The remote data source simulates a network delay of one second
+        XCTAssertTrue(userEmailLabel.waitForExistence(timeout: 5))
+        XCTAssertEqual(userEmailLabel.label, "example@q42.com")
     }
 }
