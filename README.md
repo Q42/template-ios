@@ -18,7 +18,7 @@ Only basic features that almost all projects use were added to this template:
 
 - SwiftUI using the SwiftUI lifecycle with an AppDelegate
 - Implementation of Clean Architecture
-- Dependency injection using the library Factory
+- Dependency injection using [swift-dependencies by Pointfree](https://github.com/pointfreeco/swift-dependencies)
 - Unit tests and UI tests using Salad
 - GitHub Actions CI configuration that runs the tests and submits the app to TestFlight
 
